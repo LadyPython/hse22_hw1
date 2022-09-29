@@ -109,3 +109,24 @@ platanus scaffold -c sub_contig.fa -b sub_contigBubble.fa -IP1 sub1.fastq.trimme
 ```bash
 platanus gap_close -c sub_scaffold.fa -IP1 sub1.fastq.trimmed sub2.fastq.trimmed -OP2 subMP1.fastq.int_trimmed subMP2.fastq.int_trimmed -o sub
 ```
+
+___
+
+## Бонус
+```bash
+seqtk sample -s928 oil_R1.fastq 500000 > bonus_sub1.fastq
+seqtk sample -s928 oil_R2.fastq 500000 > bonus_sub2.fastq
+seqtk sample -s928 oilMP_S4_L001_R1_001.fastq 150000 > bonus_subMP1.fastq
+seqtk sample -s928 oilMP_S4_L001_R2_001.fastq 150000 > bonus_subMP2.fastq
+mkdir bonus_fastqc_result
+fastqc bonus_sub1.fastq bonus_sub2.fastq bonus_subMP1.fastq bonus_subMP2.fastq -o bonus_fastqc_result
+multiqc bonus_fastqc_result -o bonus_multiqc_result
+platanus_trim bonus_sub1.fastq bonus_sub2.fastq
+platanus_internal_trim bonus_subMP1.fastq bonus_subMP2.fastq
+mkdir bonus_fastqc_trimmed_result
+fastqc bonus_sub1.fastq.trimmed bonus_sub2.fastq.trimmed bonus_subMP1.fastq.int_trimmed bonus_subMP2.fastq.int_trimmed -o bonus_fastqc_trimmed_result
+multiqc bonus_fastqc_result -o bonus_multiqc_trimmed_result
+platanus assemble -f bonus_sub1.fastq.trimmed bonus_sub2.fastq.trimmed -o bonus_sub
+platanus scaffold -c bonus_sub_contig.fa -b bonus_sub_contigBubble.fa -IP1 bonus_sub1.fastq.trimmed bonus_sub2.fastq.trimmed -OP2 bonus_subMP1.fastq.int_trimmed bonus_subMP2.fastq.int_trimmed -o bonus_sub
+platanus gap_close -c bonus_sub_scaffold.fa -IP1 bonus_sub1.fastq.trimmed bonus_sub2.fastq.trimmed -OP2 bonus_subMP1.fastq.int_trimmed bonus_subMP2.fastq.int_trimmed -o bonus_sub
+```
