@@ -91,7 +91,7 @@ NUM_OF_TRIMMED_PAIR(AND) = 104924
 ```bash
 mkdir fastqc_trimmed_result
 fastqc sub1.fastq.trimmed sub2.fastq.trimmed subMP1.fastq.int_trimmed subMP2.fastq.int_trimmed -o fastqc_trimmed_result
-multiqc fastqc_result -o multiqc_trimmed_result
+multiqc fastqc_trimmed_result -o multiqc_trimmed_result
 ```
 _Статистику можно найти в файле [multiqc_trimmed_report.html](multiqc_trimmed_report.html)._
 
@@ -125,8 +125,10 @@ platanus_trim bonus_sub1.fastq bonus_sub2.fastq
 platanus_internal_trim bonus_subMP1.fastq bonus_subMP2.fastq
 mkdir bonus_fastqc_trimmed_result
 fastqc bonus_sub1.fastq.trimmed bonus_sub2.fastq.trimmed bonus_subMP1.fastq.int_trimmed bonus_subMP2.fastq.int_trimmed -o bonus_fastqc_trimmed_result
-multiqc bonus_fastqc_result -o bonus_multiqc_trimmed_result
+multiqc bonus_fastqc_trimmed_result -o bonus_multiqc_trimmed_result
 platanus assemble -f bonus_sub1.fastq.trimmed bonus_sub2.fastq.trimmed -o bonus_sub
 platanus scaffold -c bonus_sub_contig.fa -b bonus_sub_contigBubble.fa -IP1 bonus_sub1.fastq.trimmed bonus_sub2.fastq.trimmed -OP2 bonus_subMP1.fastq.int_trimmed bonus_subMP2.fastq.int_trimmed -o bonus_sub
 platanus gap_close -c bonus_sub_scaffold.fa -IP1 bonus_sub1.fastq.trimmed bonus_sub2.fastq.trimmed -OP2 bonus_subMP1.fastq.int_trimmed bonus_subMP2.fastq.int_trimmed -o bonus_sub
 ```
+
+_Статистики можно найти в файлах [bonus_multiqc_report.html](bonus_multiqc_report.html) и [bonus_multiqc_trimmed_report.html](bonus_multiqc_trimmed_report.html)._
